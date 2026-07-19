@@ -1,0 +1,55 @@
+/* Navy + sky-blue theme tokens.
+   Dark mode is the primary/default aesthetic (glow effect);
+   light mode swaps the accent to a deeper shade and trades glow for a soft shadow. */
+
+:root,
+[data-theme='dark'] {
+  --color-bg: #0d1b2e;
+  --color-bg-card: #182d47;
+  --color-heading: #e2ecf7;
+  --color-body: #7d92ad;
+  --color-accent: #7dd3fc;
+  --color-accent-glow: rgba(125, 211, 252, 0.5);
+  --color-accent-glow-soft: rgba(125, 211, 252, 0.2);
+  --shadow-accent: 0 0 12px var(--color-accent-glow-soft);
+  --text-shadow-accent: 0 0 8px var(--color-accent-glow);
+  --color-nav-bg: rgba(13, 27, 46, 0.85);
+  --color-border: rgba(226, 236, 247, 0.15);
+  --color-smoke: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='light'] {
+  --color-bg: #e8eef5;
+  --color-bg-card: #f4f7fb;
+  --color-heading: #0d1b2e;
+  --color-body: #48607d;
+  --color-accent: #0369a1;
+  --color-accent-glow: transparent;
+  --color-accent-glow-soft: rgba(3, 105, 161, 0.2);
+  --shadow-accent: 0 4px 14px var(--color-accent-glow-soft);
+  --text-shadow-accent: none;
+  --color-nav-bg: rgba(232, 238, 245, 0.85);
+  --color-border: rgba(13, 27, 46, 0.12);
+  --color-smoke: rgba(13, 27, 46, 0.06);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: var(--color-bg);
+}
+
+/* Smoothly morph colors when the theme toggles, instead of an instant snap.
+   Scoped to color-related properties only, so layout/position transitions
+   elsewhere (hover states, the typing cursor, etc.) are unaffected. */
+*,
+*::before,
+*::after {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+    box-shadow 0.4s ease, fill 0.4s ease;
+}
+
+body {
+  color: var(--color-body);
+}

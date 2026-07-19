@@ -1,0 +1,34 @@
+/* Base resets only — all color, spacing, and typography for this site
+   comes from theme.css and each component's own stylesheet. */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	color-scheme: dark light;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
+}
+
+p {
+	margin: 0;
+}

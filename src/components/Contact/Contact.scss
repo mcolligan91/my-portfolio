@@ -1,0 +1,64 @@
+.contact-section {
+	padding: 6rem 1.5rem 4rem;
+	text-align: center;
+}
+
+.contact-content {
+	max-width: 32rem;
+	margin: 0 auto;
+}
+
+.contact-intro {
+	color: var(--color-body);
+	font-size: 1.1rem;
+	margin-bottom: 2rem;
+}
+
+.contact-links {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 2.5rem;
+}
+
+.contact-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.65rem 1.4rem;
+	border-radius: 6px;
+	border: 1px solid var(--color-accent);
+	color: var(--color-accent);
+	text-decoration: none;
+	font-size: 0.95rem;
+	text-shadow: var(--text-shadow-accent);
+	box-shadow: var(--shadow-accent);
+	transition: transform 0.15s ease, background-color 0.4s ease, color 0.4s ease,
+		border-color 0.4s ease, box-shadow 0.4s ease, text-shadow 0.4s ease;
+
+	svg {
+		font-size: 1.1rem;
+	}
+
+	&:hover {
+		transform: translateY(-2px);
+	}
+}
+
+.contact-business-note {
+	color: var(--color-body);
+	font-size: 0.9rem;
+	margin: 0;
+}
+
+.contact-business-link {
+	color: var(--color-accent);
+	text-decoration: none;
+	border-bottom: 1px solid var(--color-accent);
+	transition: text-shadow 0.2s ease;
+
+	&:hover {
+		text-shadow: var(--text-shadow-accent);
+	}
+}

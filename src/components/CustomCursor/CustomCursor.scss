@@ -1,0 +1,52 @@
+.custom-cursor-dot {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--color-accent);
+	pointer-events: none;
+	will-change: transform;
+	z-index: 9999;
+}
+
+.custom-cursor-ring {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	border: 1.5px solid var(--color-accent);
+	pointer-events: none;
+	will-change: transform;
+	z-index: 9998;
+	/* Position comes from JS (transform, updated every animation frame).
+	   Only the hover/click state changes below are CSS-transitioned. */
+	transition:
+		width 0.2s ease,
+		height 0.2s ease,
+		background-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.custom-cursor-ring-hover {
+	width: 56px;
+	height: 56px;
+	background-color: var(--color-accent-glow-soft);
+	box-shadow: var(--shadow-accent);
+}
+
+.custom-cursor-ring-click {
+	width: 24px;
+	height: 24px;
+}
+
+/* Hide the system cursor site-wide only while the custom cursor is active
+   (desktop pointer + motion allowed) — mobile/touch and reduced-motion
+   visitors never get this class, so they keep their normal system cursor. */
+body.custom-cursor-active,
+body.custom-cursor-active * {
+	cursor: none !important;
+}
