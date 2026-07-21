@@ -33,7 +33,16 @@ const Hero = () => {
 				</p>
 
 				<div className="hero-actions">
-					<a className="hero-cta" href="#contact-content">
+					<a
+						className="hero-cta"
+						href="#contact-content"
+						onClick={(e) => {
+							e.preventDefault();
+							document
+								.getElementById('contact-content')
+								?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+						}}
+					>
 						Get in touch
 					</a>
 				</div>
