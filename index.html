@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+        <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Michael Colligan - Senior Software Engineer specializing in front-end development, and founder of Colligan Tech Solutions LLC." />
+    <title>my-portfolio</title>
+    <script type="module" crossorigin src="/assets/index-BVOIHxWF.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dp9zSiCH.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
