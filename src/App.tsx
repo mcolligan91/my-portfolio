@@ -1,6 +1,3 @@
-// Example of how to wire everything together in your actual App.tsx.
-// Rename this / merge it into your real App component.
-
 import { ThemeProvider } from './context/ThemeContext';
 import { useActiveSection } from './hooks/useActiveSection';
 import CustomCursor from './components/CustomCursor/CustomCursor';
@@ -11,6 +8,7 @@ import Experience from './components/Experience/Experience';
 import Education from './components/Education/Education';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import AmbientParticles from './components/AmbientParticles/AmbientParticles';
 import './styles/theme.css';
 
 const menuItems = [
@@ -28,12 +26,18 @@ function AppContent() {
 		<>
 			<CustomCursor />
 			<TopNav menuItems={menuItems} activeSection={activeSection} />
-			<Hero />
-			<About />
-			<Experience />
-			<Education />
-			<Contact />
-			<Footer />
+
+      <main>
+        <Hero />
+        <div className="ambient-particles-wrapper">
+          <AmbientParticles />
+          <About />
+          <Experience />
+          <Education />
+          <Contact />
+          <Footer />
+        </div>
+      </main>
 		</>
 	);
 }

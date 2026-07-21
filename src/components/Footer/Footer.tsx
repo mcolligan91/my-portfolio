@@ -1,5 +1,4 @@
-import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
-import { EMAIL, LINKEDIN_URL, GITHUB_URL } from '../../constants/contactLinks';
+import { motion } from 'framer-motion';
 import './Footer.scss';
 
 const scrollToTop = () => {
@@ -9,23 +8,21 @@ const scrollToTop = () => {
 const Footer = () => {
 	return (
 		<footer className="site-footer">
-			<div className="site-footer-links">
-				<a href={`mailto:${EMAIL}`} aria-label="Email">
-					<FaEnvelope />
-				</a>
-				<a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-					<FaLinkedin />
-				</a>
-				<a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-					<FaGithub />
-				</a>
-			</div>
+			<p className="site-footer-credit">Built with React &amp; TypeScript</p>
 
 			<p className="site-footer-copyright">© {new Date().getFullYear()} Michael Colligan</p>
 
-			<button type="button" className="site-footer-top" onClick={scrollToTop}>
+			<motion.button
+				type="button"
+				className="site-footer-top"
+				onClick={scrollToTop}
+				initial={{ opacity: 0, y: 16 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, amount: 1 }}
+				transition={{ duration: 0.5 }}
+			>
 				&uarr; Top
-			</button>
+			</motion.button>
 		</footer>
 	);
 };

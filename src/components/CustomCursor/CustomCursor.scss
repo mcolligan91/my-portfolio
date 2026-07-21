@@ -9,6 +9,8 @@
 	pointer-events: none;
 	will-change: transform;
 	z-index: 9999;
+	opacity: 0;
+	transition: opacity 0.15s ease;
 }
 
 .custom-cursor-ring {
@@ -22,13 +24,19 @@
 	pointer-events: none;
 	will-change: transform;
 	z-index: 9998;
+	opacity: 0;
 	/* Position comes from JS (transform, updated every animation frame).
 	   Only the hover/click state changes below are CSS-transitioned. */
 	transition:
 		width 0.2s ease,
 		height 0.2s ease,
 		background-color 0.2s ease,
-		box-shadow 0.2s ease;
+		box-shadow 0.2s ease,
+		opacity 0.15s ease;
+}
+
+.custom-cursor-visible {
+	opacity: 1;
 }
 
 .custom-cursor-ring-hover {

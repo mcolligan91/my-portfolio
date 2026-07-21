@@ -1,9 +1,12 @@
 .theme-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background: transparent;
 	border: 1px solid var(--color-accent);
 	color: var(--color-accent);
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
 	border-radius: 50%;
 	font-size: 1.1rem;
 	cursor: pointer;

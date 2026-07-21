@@ -30,7 +30,13 @@ export function useActiveSection(sectionIds: string[]) {
 			for (const id of sectionIds) {
 				const el = document.getElementById(id);
 				if (!el) continue;
-				if (scrollPosition >= el.offsetTop) {
+				// getBoundingClientRect() + scrollY gives the section's true
+				// position relative to the whole document, unaffected by any
+				// positioned ancestor in between (unlike offsetTop, which
+				// measures from the nearest positioned ancestor and breaks
+				// once a wrapping element further up gets position:relative).
+				const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+				if (scrollPosition >= sectionTop) {
 					currentId = id;
 				}
 			}

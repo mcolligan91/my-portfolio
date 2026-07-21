@@ -1,4 +1,10 @@
 .top-nav {
+	background-color: transparent !important;
+	border-bottom: 1px solid transparent;
+	transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.top-nav-scrolled {
 	background-color: var(--color-nav-bg) !important;
 	backdrop-filter: blur(8px);
 	border-bottom: 1px solid var(--color-border);
@@ -64,6 +70,125 @@
 	}
 }
 
+.navbar-toggler {
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+	background-color: transparent !important;
+	line-height: 1;
+	padding: 0.25rem 0.4rem;
+
+	&:focus-visible {
+		outline: 2px solid var(--color-accent) !important;
+		outline-offset: 2px;
+	}
+}
+
+.navbar-toggler-icon {
+	background-image: none !important;
+	position: relative !important;
+	display: inline-block !important;
+	width: 22px !important;
+	height: 2px !important;
+	background-color: var(--color-heading) !important;
+	transition: background-color 0.2s ease;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 22px;
+		height: 2px;
+		background-color: var(--color-heading);
+		transition: background-color 0.2s ease;
+	}
+
+	&::before {
+		top: -7px;
+	}
+
+	&::after {
+		top: 7px;
+	}
+}
+
 .top-nav-toggle-wrapper {
 	margin-left: 1rem;
+}
+
+/* Bootstrap's Collapse animates height, which forces layout reflow on
+   every frame — one of the most expensive CSS properties to animate.
+   Any other transition running on a descendant at the same time (like
+   the sitewide theme-morph color transition) compounds that cost. Kill
+   every other transition on every descendant while collapsing/expanding;
+   nothing else needs to visibly animate during this specific motion. */
+.collapsing * {
+	transition: none !important;
+}
+
+/* Bypass Bootstrap's height-based collapse animation entirely — animating
+   `height` forces a full layout reflow on every frame, which is the real
+   source of the stutter, not competing transitions. Instead, keep the
+   menu always present in the DOM as an absolutely-positioned overlay
+   (so it never affects surrounding layout) and animate only opacity/
+   transform, which the browser can composite on the GPU with no reflow. */
+@media (max-width: 767.98px) {
+	.navbar-collapse {
+		display: block !important;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background-color: var(--color-bg-card-solid);
+		padding: 1rem 1.5rem 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+		opacity: 0;
+		transform: translateY(-8px);
+		visibility: hidden;
+		pointer-events: none;
+		height: auto !important;
+		transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+	}
+
+	.navbar-collapse.show {
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+		pointer-events: auto;
+		transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+	}
+
+	/* Bootstrap still briefly applies this mid-transition class internally;
+	   treat it as simply closed so no height-based motion is ever visible. */
+	.navbar-collapse.collapsing {
+		opacity: 0;
+		transform: translateY(-8px);
+		visibility: hidden;
+		transition: none !important;
+	}
+
+	.top-nav-links {
+		align-items: center;
+		width: 100%;
+		margin-left: 0 !important;
+	}
+
+	.top-nav-link {
+		width: 100%;
+		text-align: center;
+		padding: 0.6rem 0.25rem !important;
+	}
+
+	.top-nav-link::after {
+		left: 30%;
+		right: 30%;
+	}
+
+	.top-nav-toggle-wrapper {
+		margin-left: 0;
+		margin-top: 1rem;
+		display: flex;
+		justify-content: center;
+	}
 }

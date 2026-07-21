@@ -18,9 +18,22 @@ const Contact = () => {
 			<SectionHeader number="04" title="Contact" />
 
 			<motion.div {...revealProps} className="contact-content">
+				<h3 className="contact-heading">Get in touch</h3>
+
 				<p className="contact-intro">
-					I&apos;m always open to hearing about new opportunities — feel free to reach
-					out.
+					Need help modernizing an application, automating a workflow, or building a
+					custom software solution? I&apos;d love to hear about your project. I&apos;m
+					currently open to full-time engineering roles as well as consulting
+					engagements through{' '}
+					<a
+						href="https://www.colligantechsolutions.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="contact-business-link"
+					>
+						Colligan Tech Solutions LLC
+					</a>
+					.
 				</p>
 
 				<div className="contact-links">
@@ -44,19 +57,6 @@ const Contact = () => {
 						<FaGithub aria-hidden="true" /> GitHub
 					</a>
 				</div>
-
-				<p className="contact-business-note">
-					Looking for freelance web or data work? Visit{' '}
-					<a
-						href="https://www.colligantechsolutions.com/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="contact-business-link"
-					>
-						Colligan Tech Solutions
-					</a>
-					.
-				</p>
 			</motion.div>
 		</Container>
 	);

@@ -3,34 +3,43 @@ import { useEffect, useState } from 'react';
 interface UseTypewriterOptions {
   text: string;
   speedMs?: number;
+  startDelayMs?: number;
   onDone?: () => void;
 }
 
 /**
- * Types out `text` one character at a time. If the user has requested
- * reduced motion, skips straight to the full text so nobody is stuck
- * waiting on an animation they've asked their OS to minimize.
+ * Waits `startDelayMs` (so a cursor can blink alone first), then types out
+ * `text` one character at a time.
  */
-export function useTypewriter({ text, speedMs = 90, onDone }: UseTypewriterOptions) {
+export function useTypewriter({ text, speedMs = 90, startDelayMs = 0, onDone }: UseTypewriterOptions) {
   const [displayedText, setDisplayedText] = useState('');
+  const [hasStarted, setHasStarted] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      currentIndex += 1;
-      setDisplayedText(text.slice(0, currentIndex));
+    let intervalId: ReturnType<typeof setInterval>;
 
-      if (currentIndex >= text.length) {
-        clearInterval(intervalId);
-        setIsDone(true);
-        onDone?.();
-      }
-    }, speedMs);
+    const timeoutId = setTimeout(() => {
+      setHasStarted(true);
+      let currentIndex = 0;
+      intervalId = setInterval(() => {
+        currentIndex += 1;
+        setDisplayedText(text.slice(0, currentIndex));
 
-    return () => clearInterval(intervalId);
+        if (currentIndex >= text.length) {
+          clearInterval(intervalId);
+          setIsDone(true);
+          onDone?.();
+        }
+      }, speedMs);
+    }, startDelayMs);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, speedMs]);
+  }, [text, speedMs, startDelayMs]);
 
-  return { displayedText, isDone };
+  return { displayedText, hasStarted, isDone };
 }

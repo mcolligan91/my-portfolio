@@ -15,41 +15,60 @@ const Education = () => {
 		<Container as="section" id="education-content" className="education-section">
 			<SectionHeader number="03" title="Education" />
 
-			<motion.div {...revealProps} className="education-bio">
-				<div className="education-icon" aria-hidden="true">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M12 3L2 8l10 5 8-4.2V16h1.5V8L12 3z"
-							fill="currentColor"
-						/>
-						<path
-							d="M6 10.5V15c0 1.8 2.7 3.5 6 3.5s6-1.7 6-3.5v-4.5l-6 3-6-3z"
-							fill="currentColor"
-							opacity="0.6"
-						/>
-					</svg>
+			<motion.div {...revealProps} className="education-content">
+				<div className="education-header">
+					<span className="education-label">Bachelor of Science</span>
+
+					<h3 className="education-degree">
+						Sustainability and the Built Environment
+					</h3>
+
+					<div className="education-meta">
+						<span className="education-school">
+							University of Florida
+						</span>
+
+						<span className="education-separator">•</span>
+
+						<span className="education-years">
+							2010 - 2015
+						</span>
+
+						<span className="education-separator">•</span>
+
+						<span className="education-honors">
+							Summa Cum Laude
+						</span>
+					</div>
 				</div>
+
+				<div className="education-divider" />
+
 				<p>
-					<span className="education-degree">
-						B.S. in Sustainability and the Built Environment
-					</span>
-					, University of Florida — Summa Cum Laude, 2010 - 2015.
+					An interdisciplinary degree that combined environmental science,
+					economics, public policy, and design to explore how buildings,
+					infrastructure, and communities function as interconnected systems.
+					The program emphasized balancing technical, environmental, and human
+					considerations to solve complex real-world problems.
 				</p>
+
 				<p>
-					An interdisciplinary program covering environmental policy, ecology,
-					economics, and design — focused on finding sustainable solutions for how
-					buildings and communities are planned, constructed, and operated. Read more
-					about the{' '}
-					<a
-						href="https://catalog.ufl.edu/UGRD/colleges-schools/UGDCP/SUB_BSUB_BSUB01/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="education-link"
-					>
-						BSSBE program
-					</a>
-					.
+					Although my career ultimately led me into software engineering, the
+					systems-thinking mindset I developed at the University of Florida continues to shape
+					the way I approach technology. Whether designing a web application,
+					architecting a data pipeline, or automating business processes, I
+					strive to understand the broader system before optimizing any
+					individual component.
 				</p>
+
+				<a
+					href="https://catalog.ufl.edu/UGRD/colleges-schools/UGDCP/SUB_BSUB_BSUB01/"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="education-link"
+				>
+					Read more about the BSSBE program →
+				</a>
 			</motion.div>
 		</Container>
 	);

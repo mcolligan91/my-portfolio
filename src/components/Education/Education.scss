@@ -1,48 +1,109 @@
 .education-section {
-	padding: 4rem 1.5rem 6rem;
+	padding: 6rem 1.5rem 3rem;
 }
 
-.education-bio {
-	max-width: 40rem;
+.education-content {
+	max-width: 900px;
 	margin: 0 auto;
-	text-align: center;
+}
 
-	p {
-		color: var(--color-body);
-		font-size: 1.05rem;
-		line-height: 1.8;
-		margin-bottom: 1.25rem;
+.education-header {
+	margin-bottom: 2rem;
+}
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+.education-label {
+	display: block;
+	margin: 0 0 0.85rem;
+	line-height: 1;
+	font-size: 0.9rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--color-body);
 }
 
 .education-degree {
+	margin: 0;
+	font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+	font-weight: 700;
+	line-height: 1.05;
 	color: var(--color-heading);
-	font-weight: 600;
 }
 
-.education-icon {
+.education-meta {
 	display: flex;
-	justify-content: center;
-	color: var(--color-accent);
-	margin-bottom: 1rem;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 0.85rem;
+	line-height: 1;
 
-	svg {
-		width: 40px;
-		height: 40px;
-	}
+	font-size: 1rem;
+	color: var(--color-body);
+}
+
+.education-school {
+	font-size: 1.15rem;
+	font-weight: 600;
+	color: var(--color-accent);
+}
+
+.education-years,
+.education-honors {
+	font-weight: 500;
+}
+
+.education-separator {
+	color: var(--color-body);
+	font-size: 0.9rem;
+}
+
+.education-divider {
+	width: 100%;
+	height: 1px;
+	background-color: var(--color-border);
+	margin: 2rem 0;
+}
+
+.education-content p {
+	font-size: 1.05rem;
+	line-height: 1.9;
+	color: var(--color-body);
+	margin-bottom: 1.5rem;
 }
 
 .education-link {
+	display: inline-flex;
+	align-items: center;
+	margin-top: 0.5rem;
+
+	font-weight: 600;
 	color: var(--color-accent);
 	text-decoration: none;
-	border-bottom: 1px solid var(--color-accent);
-	transition: text-shadow 0.2s ease;
+
+	transition: color 0.2s ease, text-shadow 0.2s ease;
 
 	&:hover {
 		text-shadow: var(--text-shadow-accent);
+	}
+}
+
+@media (max-width: 768px) {
+	.education-degree {
+		font-size: 1.3rem;
+	}
+
+	.education-meta {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.4rem;
+	}
+
+	.education-separator {
+		display: none;
+	}
+
+	.education-content p {
+		font-size: 1rem;
 	}
 }

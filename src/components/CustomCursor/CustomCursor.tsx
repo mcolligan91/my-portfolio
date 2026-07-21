@@ -22,10 +22,24 @@ const CustomCursor = () => {
 		const targetPos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 		const ringPos = { ...targetPos };
 		let rafId: number;
+		let hasMoved = false;
 
 		const handleMouseMove = (e: MouseEvent) => {
 			targetPos.x = e.clientX;
 			targetPos.y = e.clientY;
+
+			// Wait for the first real mouse movement before hiding the system
+			// cursor and revealing the custom one. Otherwise both the system
+			// cursor and a custom cursor stuck at a guessed center position
+			// are visible at once, right up until the user first moves the mouse.
+			if (!hasMoved) {
+				hasMoved = true;
+				ringPos.x = targetPos.x;
+				ringPos.y = targetPos.y;
+				document.body.classList.add('custom-cursor-active');
+				dot.classList.add('custom-cursor-visible');
+				ring.classList.add('custom-cursor-visible');
+			}
 		};
 
 		const handleMouseOver = (e: MouseEvent) => {
@@ -56,7 +70,6 @@ const CustomCursor = () => {
 		document.addEventListener('mouseover', handleMouseOver);
 		document.addEventListener('mousedown', handleMouseDown);
 		document.addEventListener('mouseup', handleMouseUp);
-		document.body.classList.add('custom-cursor-active');
 
 		return () => {
 			cancelAnimationFrame(rafId);
