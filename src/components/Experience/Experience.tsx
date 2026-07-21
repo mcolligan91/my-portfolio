@@ -78,7 +78,7 @@ const jobs: Job[] = [
 				],
 			},
 			{
-				title: 'Senior Technical Analyst',
+				title: 'Senior Data Analyst',
 				dates: '2017 - 2018',
 				bullets: [
 					'Led weekly reviews for a team of 12 analysts, guiding decisions on complex, nuanced cases.',
@@ -86,7 +86,7 @@ const jobs: Job[] = [
 				],
 			},
 			{
-				title: 'Technical Analyst',
+				title: 'Data Analyst',
 				dates: '2015 - 2017',
 				bullets: [
 					'Validated LED lighting performance test data, supporting successful qualification of 17,500 products.',
