@@ -22,7 +22,7 @@ const MAX_PARTICLES = 90;
 const CONNECT_DISTANCE = 130;
 const MAX_DPR = 1.5;
 const CURSOR_RADIUS = 110; // how close the cursor needs to be to affect a particle
-const CURSOR_STRENGTH = 6; // how hard particles get pushed away
+const CURSOR_STRENGTH = 3; // how hard particles get pushed away
 
 const ParticleNetwork = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -46,6 +46,7 @@ const ParticleNetwork = () => {
 		let animationId = 0;
 		let width = 0;
 		let height = 0;
+		let lastWidth = 0;
 		// Kept far off-canvas until the mouse actually enters the section,
 		// so particles aren't affected before the cursor is really there.
 		const mouse = { x: -9999, y: -9999 };
@@ -64,8 +65,25 @@ const ParticleNetwork = () => {
 		const resize = () => {
 			const rect = section.getBoundingClientRect();
 			const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-			width = rect.width;
-			height = rect.height;
+			const newWidth = rect.width;
+			const newHeight = rect.height;
+
+			// Mobile browsers often fire a resize event when the address bar
+			// shows/hides during scroll — that only changes height, never
+			// width. Reinitializing particles in that case caused the visible
+			// "jump to new positions" glitch during a swipe. Skip it unless
+			// the width has actually changed.
+			if (width !== 0 && newWidth === lastWidth) {
+				height = newHeight;
+				canvas.height = height * dpr;
+				canvas.style.height = `${height}px`;
+				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+				return;
+			}
+
+			lastWidth = newWidth;
+			width = newWidth;
+			height = newHeight;
 			canvas.width = width * dpr;
 			canvas.height = height * dpr;
 			canvas.style.width = `${width}px`;
@@ -146,15 +164,25 @@ const ParticleNetwork = () => {
 		visibilityObserver.observe(section);
 
 		window.addEventListener('resize', resize);
-		section.addEventListener('mousemove', handleMouseMove);
-		section.addEventListener('mouseleave', handleMouseLeave);
+
+		// Only wire up cursor interaction on devices with a precise pointer.
+		// Touch devices can fire synthetic "mouse" events during scroll/swipe
+		// gestures, which fed garbage coordinates into the repulsion effect
+		// and caused particles to visibly glitch/jump during a swipe.
+		const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+		if (hasFinePointer) {
+			section.addEventListener('mousemove', handleMouseMove);
+			section.addEventListener('mouseleave', handleMouseLeave);
+		}
 
 		return () => {
 			stop();
 			visibilityObserver.disconnect();
 			window.removeEventListener('resize', resize);
-			section.removeEventListener('mousemove', handleMouseMove);
-			section.removeEventListener('mouseleave', handleMouseLeave);
+			if (hasFinePointer) {
+				section.removeEventListener('mousemove', handleMouseMove);
+				section.removeEventListener('mouseleave', handleMouseLeave);
+			}
 		};
 	}, [theme]);
 
