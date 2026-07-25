@@ -12,7 +12,7 @@ interface Particle {
 // Deliberately lighter than the Hero's ParticleNetwork: no connecting lines
 // (skips the pairwise distance checks entirely) — but tune these four
 // numbers to make it more or less noticeable:
-const MAX_PARTICLES = 140; // hard cap on particle count
+const MAX_PARTICLES = 70; // hard cap on particle count
 const DENSITY_DIVISOR = 15000; // lower = more particles per unit of area
 const MAX_DPR = 1.5;
 
@@ -37,12 +37,30 @@ const AmbientParticles = () => {
 		let animationId = 0;
 		let width = 0;
 		let height = 0;
+		let lastWidth = 0;
 
 		const resize = () => {
 			const rect = wrapper.getBoundingClientRect();
 			const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-			width = rect.width;
-			height = rect.height;
+			const newWidth = rect.width;
+			const newHeight = rect.height;
+
+			// Mobile browsers often fire a resize event when the address bar
+			// shows/hides during scroll — that only changes height, never
+			// width. Reinitializing particles in that case causes a visible
+			// "jump to new positions" glitch mid-scroll. Skip it unless the
+			// width has actually changed.
+			if (width !== 0 && newWidth === lastWidth) {
+				height = newHeight;
+				canvas.height = height * dpr;
+				canvas.style.height = `${height}px`;
+				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+				return;
+			}
+
+			lastWidth = newWidth;
+			width = newWidth;
+			height = newHeight;
 			canvas.width = width * dpr;
 			canvas.height = height * dpr;
 			canvas.style.width = `${width}px`;
