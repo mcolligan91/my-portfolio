@@ -63,12 +63,13 @@
 		background: var(--color-accent);
 		box-shadow: var(--shadow-accent);
 		transform: scaleX(0);
-		transform-origin: left;
-		transition: transform 0.2s ease;
+		transform-origin: right;
+		transition: transform 0.25s ease;
 	}
 
 	&:hover::after {
 		transform: scaleX(1);
+		transform-origin: left;
 	}
 }
 
@@ -77,6 +78,7 @@
 
 	&::after {
 		transform: scaleX(1);
+		transform-origin: left;
 	}
 }
 
